@@ -43,7 +43,7 @@ void printSchool(School classList){
     }
     printf("Total: %d pupils - %d class(es)\n", temp->pupilCounter, temp->Klassenummer);
     printf("School is operating since %d year(s)", jahrgang);
-    if(jahrgang=5){
+    if(jahrgang==5){
         freelist();
     }
 }
