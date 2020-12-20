@@ -1,192 +1,316 @@
 #include <stdio.h>
 #include <stdlib.h>
-struct School{
-
-    struct class* classList;
 
 
-};
-struct Year{
+//Speicherungen
+typedef struct School{
 
-};
+    struct Class* classList;
+
+}School;
+
+
+//Speicherungplatz
 struct Class{
 
-    int pupilCounter;
-
+    int pupilcounter;
+    int Klassenummer=1;
+    char Klassbuch = 'A';
+    int jahrgang=1;
+    School *next;
 
 };
 
-struct Nodelist{
-    int datei;
-    struct Nodelist* next;
-};
 
-void printSchool(struct school*){
+School *head;
 
-    if(maxclass == 0){
-        printf("School: no classes");
+
+//school ausdrucken
+void printSchool(School classList){
+    School *temp;
+    temp=head;
+
+    while(temp!=NULL){
+        printf("%d%c - %d\n", jahrgang, temp->Klassbuch, temp->pupilcounter);
+        temp=temp->next;
+
+        if(Klassbuch == 'Z'){
+            jahrgang++;
+        }
+        else{
+            Klassbuch++;
+        }
     }
-    else if(maxclass > 0){
-
-    }
-
-}
-
-
-
-void printYear(struct school*){
-
-    if(maxclass == 0){
-        printf("School: no classes");
-    }
-    else if(maxclass > 0){
-        printf("Enter a year (1-4): ");
-        scanf("%d", &yearfinder);
-        if(yearfinder = 1){
-            erste=yearfinder;
-        }
-        else if(yearfinder = 2){
-            zweite=yearfinder;
-        }
-        else if(yearfinder = 3){
-            dritte=yearfinder;
-        }
-        else if(yearfinder = 4){
-            vierte=yearfinder;
-        }
+    printf("Total: %d pupils - %d class(es)\n", temp->pupilCounter, temp->Klassenummer);
+    printf("School is operating since %d year(s)", jahrgang);
+    if(jahrgang=5){
+        freelist();
     }
 }
 
+//löschen die Daten
+void freeList(School *head){
 
-//
-void printClass(struct school*){
+    School *temp;
+    while(head != NULL){
 
-    if(maxclass == 0){
-        printf("School: no classes");
+        temp=head;
+        head=head->next;
+        free(temp);
     }
-    else if(maxclass > 0){
-        printf("Enter a class (e.g.: 2B): ");
-        scanf("%d%c", &yearfinder, &classfinder);
-        if(yearfinder = 1){
-            erste=yearfinder;
-        }
-        else if(yearfinder = 2){
-            zweite=yearfinder;
-        }
-        else if(yearfinder = 3){
-            dritte=yearfinder;
-        }
-        else if(yearfinder = 4){
-            vierte=yearfinder;
-        }
-    }
-
-
-
 }
 
 
+//year ausdrucken
+void printYear(School classList){
+    School *temp;
+    temp=head;
+    int summe;
+
+        if(jahrgang == 1){
+            while(temp!=NULL){
+
+                printf("%d%c - %d\n", jahrgang, temp->Klassbuch, temp->pupilcounter);
+                temp=temp->next;
+                    Klassbuch++;
+            }
+            printf("Total: %d pupils - %d class(es)\n", temp->pupilCounter, temp->Klassenummer);
+        }
+        else if(jahrgang == 2){
+
+            while(temp!=NULL){
+
+                printf("%d%c - %d\n", jahrgang, temp->Klassbuch, temp->pupilcounter);
+                temp=temp->next;
+                    Klassbuch++;
+            }
+            printf("Total: %d pupils - %d class(es)\n", temp->pupilCounter, temp->Klassenummer);
+        }
+        else if(jahrgang == 3){
+
+            while(temp!=NULL){
+
+                printf("%d%c - %d\n", jahrgang, temp->Klassbuch, temp->pupilcounter);
+                temp=temp->next;
+                    Klassbuch++;
+            }
+            printf("Total: %d pupils - %d class(es)\n", temp->pupilCounter, temp->Klassenummer);
+        }
+        else if(jahrgang == 4){
+
+            while(temp!=NULL){
+
+                printf("%d%c - %d\n", jahrgang, temp->Klassbuch, temp->pupilcounter);
+                temp=temp->next;
+                    Klassbuch++;
+
+            }
+            printf("Total: %d pupils - %d class(es)\n", temp->pupilCounter, temp->Klassenummer);
+            jahrgang++;
+            if(jahrgang=5){
+                freelist();
+            }
+        }
+    }
 
 
-
-int main(){
-    char school,year,Sclass,Snew,exit,result;
-    int classcounter;
-    int maxschuler;
-    int maxclass=0;
-    int schulernum;
-    int schulerinnum;
-    int yearfinder;
-    char classfinder;
-    int classList[25][3];
-    struct Node* erste = NULL;
-    struct Node* zweite = NULL;
-    struct Node* dritte = NULL;
-    struct Node* vierte = NULL;
-
-    erste = (struct Nodelist*)malloc(sizeof(struct Nodelist));
-    zweite = (struct Nodelist*)malloc(sizeof(struct Nodelist));
-    dritte = (struct Nodelist*)malloc(sizeof(struct Nodelist));
-    vierte = (struct Nodelist*)malloc(sizeof(struct Nodelist));
+//class ausdrucken
+void printClass(School classList){
+    School *temp;
+    temp=head;
 
 
+        if(jahrgang = 1){
+            printf("Class %d%c has %d pupils\n", jahrgang, temp->Klassbuch, temp->pupilcounter);
 
+        }
+        else if(jahrgang = 2){
+            printf("Class %d%c has %d pupils\n", jahrgang, temp->Klassbuch, temp->pupilcounter);
+
+        }
+        else if(jahrgang = 3){
+            printf("Class %d%c has %d pupils\n", jahrgang, temp->Klassbuch, temp->pupilcounter);
+
+        }
+        else if(jahrgang = 4){
+            printf("Class %d%c has %d pupils\n", jahrgang, temp->Klassbuch , temp->pupilcounter);
+            jahrgang++;
+            if(jahrgang=5){
+                freelist();
+            }
+        }
+    }
+
+
+//insert die Dateien
+void insert(int x, int y){
+    School *temp;
+    temp = (School*)malloc(sizeof(School));
+    if(!temp){
+        return;
+    }
+    temp->a = x;
+    temp->b = y;
+    temp->next = head;
+    head= temp;
+}
+
+
+//menu
+char getMenu(){
+    char result;
     printf("Choose action: school (s), year (y), class (c), new (n), exit (x): ");
-    switch(result){
+    scanf(" %c", &result);
+    while(result != 's' && result != 'y' && result != 'c' && result != 'n' && result != 'x'){
+        printf("\nInvalid selection\n");
+        return result;
+    }
+}
+
+
+int main(School classList){
+//deklalieren
+    //char school,year,Sclass,Snew,exit,result,classfinder;
+    int n,x,y;
+    int i;
+    int jahrgang;
+    head = NULL;
+    School *temp;
+
+    int classcounter=0;
+    int maxclass=26;
+    char Klassbuch='A';
+    //'A'+0='A','A'+1='B','A'+2='C','A'+3='D','A'+4='E','A'+5='F','A'+6='G','A'+7='H','A'+8='I','A'+9='J','A'+10='K',
+    //'A'+11='L','A'+12='M','A'+13='N','A'+14='O','A'+15='P','A'+16='Q','A'+17='R','A'+18='S','A'+19='T','A'+20='U',
+    //'A'+21='V','A'+22='W','A'+23='X','A'+24='Y','A'+25='Z';
+
+    Klassbuch+0='A',Klassbuch+1='B',Klassbuch+2='C',Klassbuch+3='D',Klassbuch+4='E',Klassbuch+5='F',Klassbuch+6='G',Klassbuch+7='H',Klassbuch+8='I',Klassbuch+9='J',Klassbuch+10='K',
+    Klassbuch+11='L',Klassbuch+12='M',Klassbuch+13='N',Klassbuch+14='O',Klassbuch+15='P',Klassbuch+16='Q',Klassbuch+17='R',Klassbuch+18='S',Klassbuch+19='T',Klassbuch+20='U',
+    Klassbuch+21='V',Klassbuch+22='W',Klassbuch+23='X',Klassbuch+24='Y',Klassbuch+25='Z';
+
+
+//menu rufen
+    char switchmode = 'a';
+    while(switchmode != 'x'){
+        switchmode = getMenu();
+
+//Falle
+    switch(switchmode){
 
     case('s'):
-        result=school;
-        printSchool();
+        printf("\n\n");
+        if(classcounter == 0){
+            printf("School: no classes");
+            return result;
+        }
+        else{
+            printSchool();
+        }
+        break;
 
 
     case('y'):
-        result=year;
-        printYear();
-    case('c'):
-        result=Sclass;
-        classcounter++;
-        maxclass++;
-        printClass();
 
-    case('n'):
-        result=Snew;
-        printf("Enter the number of students: ");
-        scanf("%d", &schulerinnum);
-        if(schulerinnum < 15){
-            printf("Not enough students");
+        printf("\n");
+        if(classcounter == 0){
+            printf("School: no classes");
             return result;
         }
-        else if(schulerinnum >= 15 && schulerinnum <= 780){
-            int Pupilcounter = schulerinnum;
-            if(schulerinnum >=15 && schulerinnum <= 30){
-                schulerinnum = classList[0][0];
-            }
-            else if(schulerinnum > 30 && schulerinnum < 40){
-                (schulerinnum / 2) = classList[0][0];
-                (schulerinnum / 2) = classList[0][1];
-            }
-            else if(schulerinnum >= 40){
-                if((schulerinnum / 2) >= 20 && (schulerinnum / 2) <= 30){
-                    (schulerinnum / 2) = classList[0][0];
-                    (schulerinnum / 2) = classList[0][1];
-                }
-                else if((schulerinnum / 3) >= 20 && (schulerinnum / 3) <= 30){
-                    (schulerinnum / 3) = classList[0][0];
-                    (schulerinnum / 3) = classList[0][1];
-                    (schulerinnum / 3) = classList[0][2];
-                }
-                else{
-                    (schulerinnum / 4) = classList[0][0];
-                    (schulerinnum / 4) = classList[0][1];
-                    (schulerinnum / 4) = classList[0][2];
-                    (schulerinnum / 4) = classList[0][3];
-                }
-            }
+        else if(classcounter > 0){
+            printf("Enter a year (1-4): ");
+            scanf("%d", &jahrgang);
+            printf("\n\n");
+            printYear();
         }
+        break;
+
+    case('c'):
+        if(classcounter == 0){
+            printf("\n");
+            printf("School: no classes");
+        }
+        else if(classcounter > 0){
+            printf("\n");
+            printf("Enter a class (e.g.: 2B): ");
+            scanf("%d%c", &jahrgang, &Klassbuch);
+            printf("\n");
+            printClass();
+        }
+        break;
+
+    case('n'):
+        classcounter++;
+        for(i=0; i < maxclass; i++){
+            if(i < maxclass){
+                int schulerinnum;
+                printf("\nEnter the number of students: ");
+                scanf(" %d", &schulerinnum);
+//sortieren
+                if(schulerinnum < 15){
+                    printf("\nNot enough students");
+                    return result;
+                }
+                else if(schulerinnum > 780 && schulerinnum < 0){
+                    printf("\nInvalid selection\n");
+                    return result;
+                }
+                else if(schulerinnum >= 15 && schulerinnum <= 780){
+                    pupilcounter = schulerinnum;
+                    if(schulerinnum >=15 && schulerinnum <= 30){
+
+                        x = schulerinnum;
+
+                    }
+                    else if(schulerinnum > 30 && schulerinnum < 40){
+                        x = (schulerinnum / 2);
+                        y = (schulerinnum / 2);
+
+
+                    }
+                    else if(schulerinnum >= 40){
+                        if((schulerinnum / 2) >= 20 && (schulerinnum / 2) <= 30){
+                            x = (schulerinnum / 2);
+                            y = (schulerinnum / 2);
+                        }
+                        else if((schulerinnum / 3) >= 20 && (schulerinnum / 3) <= 30){
+                            x = (schulerinnum / 3);
+                            y = (schulerinnum / 3);
+                            ? = (schulerinnum / 3);
+
+                        }
+                        else{
+                            x = (schulerinnum / 4);
+                            y = (schulerinnum / 4);
+                            ? = (schulerinnum / 4);
+                            ?? = (schulerinnum / 4);
+
+                            }
+                    }
+                    insert(x,y);
+                }
+            else if(i > maxclass){
+                printf("Zu viele Class");
+            }
+
+            }
+
+        }
+        break;
+
     case('x'):
         exit;
-    default:
-        printf("Invalid selection");
-        return result;
+        return 0;
+
     }
 
-    if(maxclass==4){
-        erste->datei=1;
-        erste->next=zweite;
-
-        zweite->datei=2;
-        zweite->next=dritte;
-
-        dritte->datei=3;
-        dritte->next=vierte;
-
-        vierte->datei=4;
-        vierte->next=NULL;
     }
-
-
-
-
 
     return 0;
 }
+
+//nur Code falls es nutzbar sein kann
+ /*int ersteN[25],zweiteN[25],dritteN[25],vierteN[25];
+    char ersteL[] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+    char zweiteL[] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+    char dritteL[] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+    char vierteL[] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};*/
